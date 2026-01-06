@@ -1,800 +1,952 @@
 <!DOCTYPE html>
-
-<html dir="ltr" lang="en">
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
-<title>Random Basketball Online ❤️【Play at randombasketballonline.github.io】</title>
-<meta content="If you like to play Random Basketball⭐ Dive into ⚡ Dive into fullscreen fun with randombasketball Game Just Gaming! (人◕‿◕)" name="description"/>
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-<meta name="keywords" content="HTML, CSS, JavaScript">
-<!-- Google tag (gtag.js) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Basket - Online Multiplayer Basketball</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style type="text/css">
-.report-modal {
-  display: none;
-  position: fixed;
-  z-index: 20;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
-}
-.report-modal-content {
-  background-color: #fefefe;
-  color: #000;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  max-width: 320px;
-}
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-.close:hover,.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-.report-label {
-  padding: 0 10px;
-  margin-right: 5px;
-  border-radius: 15px;
-  display: inline-block;
-  margin-bottom: 8px;
-}
-</style>
-<link rel="icon" href="/images/favicon.png" sizes="32x32">
-<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="css/jquery-comments.css" rel="stylesheet" type="text/css"/>
-<link href="css/user.css" rel="stylesheet" type="text/css"/>
-<link href="css/style.css" rel="stylesheet" type="text/css"/>
-<link href="css/custom.css" rel="stylesheet" type="text/css"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet"/>
-<!-- Font Awesome icons (free version)-->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-<!-- Google fonts-->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
 
+        /* Login Screen Styles */
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .login-container.active {
+            display: block;
+        }
+
+        .game-container {
+            width: 100%;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .game-container.active {
+            display: flex;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Logo and Title */
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e72 100%);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .login-header h1 {
+            font-size: 28px;
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+        }
+
+        /* Button Styles */
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(42, 82, 152, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #2a5298;
+            border: 2px solid #2a5298;
+            margin-top: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f5f5;
+        }
+
+        .toggle-auth {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .toggle-auth a {
+            color: #2a5298;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .toggle-auth a:hover {
+            text-decoration: underline;
+        }
+
+        /* Game Header */
+        .game-header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .game-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .player-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .player-stats {
+            text-align: right;
+            font-size: 14px;
+        }
+
+        .player-name {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .logout-btn {
+            padding: 8px 15px;
+            background: rgba(255, 107, 107, 0.8);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 107, 107, 1);
+        }
+
+        /* Game Main Area */
+        .game-main {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* Court Area */
+        .court-area {
+            flex: 1;
+            background: linear-gradient(180deg, #d4a574 0%, #c9915e 100%);
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            border: 3px solid #8b6f47;
+        }
+
+        .court-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .center-circle {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 3px solid white;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .center-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .baseline {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: white;
+            top: 10%;
+            left: 0;
+        }
+
+        .baseline-bottom {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: white;
+            bottom: 10%;
+            left: 0;
+        }
+
+        .three-point-line {
+            position: absolute;
+            width: 250px;
+            height: 140px;
+            border: 3px solid white;
+            border-bottom: none;
+            top: 10%;
+            border-radius: 60px 60px 0 0;
+        }
+
+        .three-point-left {
+            left: 5%;
+        }
+
+        .three-point-right {
+            right: 5%;
+        }
+
+        .hoop {
+            position: absolute;
+            width: 40px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid white;
+            border-radius: 20px;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .backboard {
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid white;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        /* Player Avatar */
+        .player-avatar {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e72 100%);
+            border-radius: 50%;
+            border: 3px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            cursor: grab;
+            transition: box-shadow 0.2s ease;
+            z-index: 20;
+        }
+
+        .player-avatar:hover {
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+        }
+
+        .player-avatar.selected {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        .opponent-avatar {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44b3a3 100%);
+        }
+
+        .ball {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle at 30% 30%, #ff9500, #ff6b00);
+            border-radius: 50%;
+            border: 2px solid #cc5200;
+            z-index: 15;
+            cursor: grab;
+        }
+
+        .ball:active {
+            cursor: grabbing;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ffb84d;
+        }
+
+        .score-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .team-score {
+            text-align: center;
+        }
+
+        .team-name {
+            font-size: 12px;
+            color: #bbb;
+            margin-bottom: 5px;
+        }
+
+        .score {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .vs {
+            color: #ffb84d;
+            font-weight: bold;
+        }
+
+        .players-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .player-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 13px;
+            border-left: 3px solid #ffb84d;
+        }
+
+        .player-badge {
+            display: inline-block;
+            background: #ff6b6b;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            margin-left: 5px;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-btn {
+            padding: 10px;
+            background: rgba(255, 107, 107, 0.8);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 107, 107, 1);
+        }
+
+        .control-btn.secondary {
+            background: rgba(42, 82, 152, 0.8);
+        }
+
+        .control-btn.secondary:hover {
+            background: rgba(42, 82, 152, 1);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .chat-box {
+            display: flex;
+            flex-direction: column;
+            height: 150px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 12px;
+        }
+
+        .chat-message {
+            margin-bottom: 5px;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .chat-input-group {
+            display: flex;
+            gap: 5px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .chat-send {
+            padding: 8px 12px;
+            background: #ffb84d;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .chat-send:hover {
+            background: #ffc966;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 500px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .modal-header {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #1e3c72;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .game-main {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: 200px;
+            }
+
+            .login-container {
+                margin: 20px;
+            }
+        }
+    </style>
 </head>
-<body id="page-top" style="background: url('images/BGMAK.png'); background-size: cover;">
-<!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark top-nav" id="mainNav">
-<div class="container">
-<button aria-controls="nav-menu" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#nav-menu" data-bs-toggle="collapse" type="button">
-<span class="navbar-toggler-icon"></span>
-</button>
-<a class="navbar-brand js-scroll-trigger" href="/">
-<!-- <img src="#" width="70" height="35" class="" alt=" logo"> -->
-<strong>Random Basket Ball Online</strong>
-</a>
-</div>
-</nav>
-<div class="container">
-  <h1 style="font-weight: bolder; color:white; text-align: center;">Random Basketball Online| Unblocked the basket Game ❤️</h1> 
-  <br>
-<!-- More FnaF games section -->
-<!-- New games section -->
-<!-- <h3 class="section-title">Latest Games</h3> -->
+<body>
+    <!-- Login Container -->
+    <div class="login-container active" id="loginContainer">
+        <div class="login-header">
+            <div class="logo">🏀</div>
+            <h1>Random Basket</h1>
+            <p>Online Multiplayer Basketball</p>
+        </div>
 
-<div class="row grid-container">
+        <div class="error-message" id="errorMessage"></div>
 
-
-  <div class="container-fluid mt-4 p-0">
-    <div class="row">
-     <div class="col text-center p-0 m-0">
-            <div id="game">
-                <div class="mx-auto" style="width: 900px; height: 675px; overflow: hidden;">
-                    <iframe width="100%" height="100%" src="https://2048taylorswift.github.io/basketrandom/" frameborder="0" border="0" scrolling="no" class="" allowfullscreen></iframe>
-                </div>
+        <!-- Login Form -->
+        <form id="loginForm" style="display: block;">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
             </div>
-        </div>                    
-    </div>
-    <div class="row my-3">
-        <div class="col text-left">
-            <h2 class="my-4 text-center">Description</h2>
 
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" style="display: none;">
+            <div class="form-group">
+                <label for="regUsername">Username</label>
+                <input type="text" id="regUsername" name="username" placeholder="Choose a username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regEmail">Email</label>
+                <input type="email" id="regEmail" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regPassword">Password</label>
+                <input type="password" id="regPassword" name="password" placeholder="Create a password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regConfirmPassword">Confirm Password</label>
+                <input type="password" id="regConfirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Account</button>
+        </form>
+
+        <div class="toggle-auth">
+            <p id="toggleText">Don't have an account? <a onclick="toggleAuthForm()">Sign Up</a></p>
         </div>
     </div>
-</div>
 
-<div class="row grid-container">
-
-  <div class="col-lg-2 col-md-4 col-6 grid-3">
-    <a href="./game/game54.html" title="Traffic Rush">
-   <div class="game-item">
-    <div class="list-game">
-    <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/54.webp"/></div>
-    </div>
-     </div>
-      </a>
-     </div> 
-
-     <div class="col-lg-2 col-md-4 col-6 grid-3">
-      <a href="./game/game55.html" title="Traffic Rush">
-     <div class="game-item">
-      <div class="list-game">
-      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/55.webp"/></div>
-      </div>
-       </div>
-        </a>
-       </div> 
-
-       <div class="col-lg-2 col-md-4 col-6 grid-3">
-        <a href="./game/game56.html" title="Traffic Rush">
-       <div class="game-item">
-        <div class="list-game">
-        <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/56.webp"/></div>
-        </div>
-         </div>
-          </a>
-         </div> 
-
-         <div class="col-lg-2 col-md-4 col-6 grid-3">
-          <a href="./game/game57.html" title="Traffic Rush">
-         <div class="game-item">
-          <div class="list-game">
-          <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/57.webp"/></div>
-          </div>
-           </div>
-            </a>
-           </div> 
-
-           <div class="col-lg-2 col-md-4 col-6 grid-3">
-            <a href="./game/game58.html" title="Traffic Rush">
-           <div class="game-item">
-            <div class="list-game">
-            <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/58.webp"/></div>
-            </div>
-             </div>
-              </a>
-             </div> 
-
-             <div class="col-lg-2 col-md-4 col-6 grid-3">
-              <a href="./game/game59.html" title="Traffic Rush">
-             <div class="game-item">
-              <div class="list-game">
-              <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/59.webp"/></div>
-              </div>
-               </div>
-                </a>
-               </div> 
-
-               <div class="col-lg-2 col-md-4 col-6 grid-3">
-                <a href="./game/game60.html" title="Traffic Rush">
-               <div class="game-item">
-                <div class="list-game">
-                <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/60.webp"/></div>
+    <!-- Game Container -->
+    <div class="game-container" id="gameContainer">
+        <!-- Game Header -->
+        <div class="game-header">
+            <div class="game-title">🏀 Random Basket</div>
+            <div class="player-info">
+                <div class="player-stats">
+                    <div class="player-name" id="currentPlayerName">Loading...</div>
+                    <div>Points: <span id="playerPoints">0</span></div>
                 </div>
-                 </div>
-                  </a>
-                 </div> 
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
 
+        <!-- Game Main Area -->
+        <div class="game-main">
+            <!-- Basketball Court -->
+            <div class="court-area" id="courtArea">
+                <div class="court-lines">
+                    <div class="backboard"></div>
+                    <div class="hoop"></div>
+                    <div class="center-circle"></div>
+                    <div class="center-dot"></div>
+                    <div class="baseline"></div>
+                    <div class="baseline-bottom"></div>
+                    <div class="three-point-line three-point-left"></div>
+                    <div class="three-point-line three-point-right"></div>
+                </div>
+                <div class="ball" id="ball" style="top: 50%; left: 50%;"></div>
+            </div>
 
-
-                 <div class="col-lg-2 col-md-4 col-6 grid-3">
-                  <a href="./game/game61.html" title="Traffic Rush">
-                 <div class="game-item">
-                  <div class="list-game">
-                  <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/61.webp"/></div>
-                  </div>
-                   </div>
-                    </a>
-                   </div> 
-                   <div class="col-lg-2 col-md-4 col-6 grid-3">
-                    <a href="./game/game62.html" title="Traffic Rush">
-                   <div class="game-item">
-                    <div class="list-game">
-                    <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/62.webp"/></div>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Score Section -->
+                <div class="section">
+                    <div class="section-title">Score</div>
+                    <div class="score-display">
+                        <div class="team-score">
+                            <div class="team-name">Your Team</div>
+                            <div class="score" id="teamScore">0</div>
+                        </div>
+                        <div class="vs">VS</div>
+                        <div class="team-score">
+                            <div class="team-name">Opponents</div>
+                            <div class="score" id="opponentScore">0</div>
+                        </div>
                     </div>
-                     </div>
-                      </a>
-                     </div> 
-             
-                     <div class="col-lg-2 col-md-4 col-6 grid-3">
-                       <a href="./game/game63.html" title="Traffic Rush">
-                      <div class="game-item">
-                       <div class="list-game">
-                       <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/63.webp"/></div>
-                       </div>
-                        </div>
-                         </a>
-                        </div>
-             
-                        <div class="col-lg-2 col-md-4 col-6 grid-3">
-                         <a href="./game/game64.html" title="Traffic Rush">
-                        <div class="game-item">
-                         <div class="list-game">
-                         <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/64.webp"/></div>
-                         </div>
-                          </div>
-                           </a>
-                          </div>
-             
-                          <div class="col-lg-2 col-md-4 col-6 grid-3">
-                           <a href="./game/game65.html" title="Traffic Rush">
-                          <div class="game-item">
-                           <div class="list-game">
-                           <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/65.webp"/></div>
-                           </div>
-                            </div>
-                             </a>
-                            </div>
-                            <div class="col-lg-2 col-md-4 col-6 grid-3">
-                              <a href="./game/game40.html" title="Traffic Rush">
-                             <div class="game-item">
-                              <div class="list-game">
-                              <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/40.webp"/></div>
-                              </div>
-                               </div>
-                                </a>
-                               </div> 
-                               
-<div class="col-lg-2 col-md-4 col-6 grid-3">
-<a href="./game/game1.html" title="Basketball Frvr">
-<div class="game-item">
-<div class="list-game">
-<div class="list-thumbnail"><img alt="Basketball Frvr" class="lazyload" src="img/1.webp"/></div>
-</div>
-</div>
-</a>
-</div>
-<div class="col-lg-2 col-md-4 col-6 grid-3">
-  <a href="./game/game37.html" title="Traffic Rush">
-  <div class="game-item">
-  <div class="list-game">
-  <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/37.webp"/></div>
-  </div>
-  </div>
-  </a>
-  </div>
-  <div class="col-lg-2 col-md-4 col-6 grid-3">
-    <a href="./game/game38.html" title="Traffic Rush">
-    <div class="game-item">
-    <div class="list-game">
-    <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/38.webp"/></div>
-    </div>
-    </div>
-    </a>
-    </div>
-    <div class="col-lg-2 col-md-4 col-6 grid-3">
-      <a href="./game/game39.html" title="Traffic Rush">
-      <div class="game-item">
-      <div class="list-game">
-      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/39.webp"/></div>
-      </div>
-      </div>
-      </a>
-      </div>
-
-
-
-<div class="col-lg-2 col-md-4 col-6 grid-3">
-<a href="./game/game2.html" title="Traffic Rush">
-<div class="game-item">
-<div class="list-game">
-<div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/2.webp"/></div>
-</div>
-</div>
-</a>
-</div>
-<div class="col-lg-2 col-md-4 col-6 grid-3">
-  <a href="./game/game3.html" title="Traffic Rush">
-  <div class="game-item">
-  <div class="list-game">
-  <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/3.webp"/></div>
-  </div>
-  </div>
-  </a>
-  </div>
-
-  <div class="col-lg-2 col-md-4 col-6 grid-3">
-    <a href="./game/game4.html" title="Traffic Rush">
-    <div class="game-item">
-    <div class="list-game">
-    <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/4.webp"/></div>
-    </div>
-    </div>
-    </a>
-    </div>
-
-    <div class="col-lg-2 col-md-4 col-6 grid-3">
-      <a href="./game/game5.html" title="Traffic Rush">
-      <div class="game-item">
-      <div class="list-game">
-      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/5.webp"/></div>
-      </div>
-      </div>
-      </a>
-      </div>
-
-
-      <div class="col-lg-2 col-md-4 col-6 grid-3">
-        <a href="./game/game6.html" title="Traffic Rush">
-        <div class="game-item">
-        <div class="list-game">
-        <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/6.webp"/></div>
-        </div>
-        </div>
-        </a>
-        </div>
-
-
-        
-    <div class="col-lg-2 col-md-4 col-6 grid-3">
-      <a href="./game/game7.html" title="Traffic Rush">
-      <div class="game-item">
-      <div class="list-game">
-      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/7.webp"/></div>
-      </div>
-      </div>
-      </a>
-      </div>
-
-      
-    <div class="col-lg-2 col-md-4 col-6 grid-3">
-      <a href="./game/game8.html" title="Traffic Rush">
-      <div class="game-item">
-      <div class="list-game">
-      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/8.webp"/></div>
-      </div>
-      </div>
-      </a>
-      </div>
-
-      
-    <div class="col-lg-2 col-md-4 col-6 grid-3">
-      <a href="./game/game9.html" title="Traffic Rush">
-      <div class="game-item">
-      <div class="list-game">
-      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/9.webp"/></div>
-      </div>
-      </div>
-      </a>
-      </div>
-
-      
-    <div class="col-lg-2 col-md-4 col-6 grid-3">
-      <a href="./game/game10.html" title="Traffic Rush">
-      <div class="game-item">
-      <div class="list-game">
-      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/10.webp"/></div>
-      </div>
-      </div>
-      </a>
-      </div>
-
-      
-    <div class="col-lg-2 col-md-4 col-6 grid-3">
-      <a href="./game/game11.html" title="Traffic Rush">
-      <div class="game-item">
-      <div class="list-game">
-      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/11.webp"/></div>
-      </div>
-      </div>
-      </a>
-      </div>
-
-      
-    <div class="col-lg-2 col-md-4 col-6 grid-3">
-      <a href="./game/game12.html" title="Traffic Rush">
-      <div class="game-item">
-      <div class="list-game">
-      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/12.webp"/></div>
-      </div>
-      </div>
-      </a>
-      </div>
-
-      <div class="col-lg-2 col-md-4 col-6 grid-3">
-        <a href="./game/game13.html" title="Traffic Rush">
-        <div class="game-item">
-        <div class="list-game">
-        <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/13.webp"/></div>
-        </div>
-        </div>
-        </a>
-        </div>
-
-        <div class="col-lg-2 col-md-4 col-6 grid-3">
-          <a href="./game/game14.html" title="Traffic Rush">
-          <div class="game-item">
-          <div class="list-game">
-          <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/14.webp"/></div>
-          </div>
-          </div>
-          </a>
-          </div>
-
-          <div class="col-lg-2 col-md-4 col-6 grid-3">
-            <a href="./game/game15.html" title="Traffic Rush">
-            <div class="game-item">
-            <div class="list-game">
-            <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/15.webp"/></div>
-            </div>
-            </div>
-            </a>
-            </div>
-
-            <div class="col-lg-2 col-md-4 col-6 grid-3">
-              <a href="./game/game16.html" title="Traffic Rush">
-              <div class="game-item">
-              <div class="list-game">
-              <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/16.webp"/></div>
-              </div>
-              </div>
-              </a>
-              </div>
-    
-              <div class="col-lg-2 col-md-4 col-6 grid-3">
-                <a href="./game/game17.html" title="Traffic Rush">
-                <div class="game-item">
-                <div class="list-game">
-                <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/17.webp"/></div>
-                </div>
-                </div>
-                </a>
                 </div>
 
-                <div class="col-lg-2 col-md-4 col-6 grid-3">
-                  <a href="./game/game18.html" title="Traffic Rush">
-                  <div class="game-item">
-                  <div class="list-game">
-                  <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/18.webp"/></div>
-                  </div>
-                  </div>
-                  </a>
-                  </div>     
-                  
-                  <div class="col-lg-2 col-md-4 col-6 grid-3">
-                    <a href="./game/game19.html" title="Traffic Rush">
-                    <div class="game-item">
-                    <div class="list-game">
-                    <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/19.webp"/></div>
+                <!-- Players Section -->
+                <div class="section">
+                    <div class="section-title">Team</div>
+                    <div class="players-list" id="playersList">
+                        <div class="player-item">Player 1 <span class="player-badge">You</span></div>
+                        <div class="player-item">Player 2</div>
+                        <div class="player-item">Player 3</div>
                     </div>
-                    </div>
-                    </a>
-                    </div>
-
-                    <div class="col-lg-2 col-md-4 col-6 grid-3">
-                      <a href="./game/game20.html" title="Traffic Rush">
-                      <div class="game-item">
-                      <div class="list-game">
-                      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/20.webp"/></div>
-                      </div>
-                      </div>
-                      </a>
-                      </div>
-
-                      <div class="col-lg-2 col-md-4 col-6 grid-3">
-                        <a href="./game/game21.html" title="Traffic Rush">
-                        <div class="game-item">
-                        <div class="list-game">
-                        <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/21.webp"/></div>
-                        </div>
-                        </div>
-                        </a>
-                        </div>
-
-                        <div class="col-lg-2 col-md-4 col-6 grid-3">
-                          <a href="./game/game22.html" title="Traffic Rush">
-                          <div class="game-item">
-                          <div class="list-game">
-                          <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/22.webp"/></div>
-                          </div>
-                          </div>
-                          </a>
-                          </div>
-
-   <div class="col-lg-2 col-md-4 col-6 grid-3">
-   <a href="./game/game23.html" title="Traffic Rush">
-   <div class="game-item">
-     <div class="list-game">
-   <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/23.webp"/></div>
-      </div>
-     </div>
-     </a>
-    </div>  
-    
-    <div class="col-lg-2 col-md-4 col-6 grid-3">
-      <a href="./game/game24.html" title="Traffic Rush">
-      <div class="game-item">
-        <div class="list-game">
-      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/24.webp"/></div>
-         </div>
-        </div>
-        </a>
-       </div> 
-
-       <div class="col-lg-2 col-md-4 col-6 grid-3">
-        <a href="./game/game25.html" title="Traffic Rush">
-        <div class="game-item">
-          <div class="list-game">
-        <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/25.webp"/></div>
-           </div>
-          </div>
-          </a>
-         </div>
-         
-         <div class="col-lg-2 col-md-4 col-6 grid-3">
-          <a href="./game/game26.html" title="Traffic Rush">
-          <div class="game-item">
-            <div class="list-game">
-          <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/26.webp"/></div>
-             </div>
-            </div>
-            </a>
-           </div> 
-
-           <div class="col-lg-2 col-md-4 col-6 grid-3">
-            <a href="./game/game27.html" title="Traffic Rush">
-            <div class="game-item">
-              <div class="list-game">
-            <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/27.webp"/></div>
-               </div>
-              </div>
-              </a>
-             </div> 
-
-             <div class="col-lg-2 col-md-4 col-6 grid-3">
-              <a href="./game/game28.html" title="Traffic Rush">
-              <div class="game-item">
-                <div class="list-game">
-              <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/28.webp"/></div>
-                 </div>
                 </div>
-                </a>
-               </div> 
 
-               <div class="col-lg-2 col-md-4 col-6 grid-3">
-                <a href="./game/game29.html" title="Traffic Rush">
-                <div class="game-item">
-                  <div class="list-game">
-                <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/29.webp"/></div>
-                   </div>
-                  </div>
-                  </a>
-                 </div> 
-
-                 <div class="col-lg-2 col-md-4 col-6 grid-3">
-                  <a href="./game/game30.html" title="Traffic Rush">
-                  <div class="game-item">
-                    <div class="list-game">
-                  <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/30.webp"/></div>
-                     </div>
+                <!-- Controls Section -->
+                <div class="section">
+                    <div class="section-title">Controls</div>
+                    <div class="controls">
+                        <button class="control-btn" onclick="shoot()">🏹 Shoot</button>
+                        <button class="control-btn secondary" onclick="pass()">➡️ Pass</button>
+                        <button class="control-btn secondary" onclick="defend()">🛡️ Defend</button>
                     </div>
-                    </a>
-                   </div>  
-
-                   <div class="col-lg-2 col-md-4 col-6 grid-3">
-                    <a href="./game/game31.html" title="Traffic Rush">
-                    <div class="game-item">
-                      <div class="list-game">
-                    <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/31.webp"/></div>
-                       </div>
-                      </div>
-                      </a>
-                     </div> 
-
-                     <div class="col-lg-2 col-md-4 col-6 grid-3">
-                      <a href="./game/game32.html" title="Traffic Rush">
-                      <div class="game-item">
-                        <div class="list-game">
-                      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/32.webp"/></div>
-                         </div>
-                        </div>
-                        </a>
-                       </div> 
-
-       <div class="col-lg-2 col-md-4 col-6 grid-3">
-       <a href="./game/game33.html" title="Traffic Rush">
-      <div class="game-item">
-       <div class="list-game">
-       <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/33.webp"/></div>
-       </div>
-        </div>
-         </a>
-        </div> 
-
-        <div class="col-lg-2 col-md-4 col-6 grid-3">
-          <a href="./game/game34.html" title="Traffic Rush">
-         <div class="game-item">
-          <div class="list-game">
-          <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/34.webp"/></div>
-          </div>
-           </div>
-            </a>
-           </div>
-
-           <div class="col-lg-2 col-md-4 col-6 grid-3">
-            <a href="./game/game35.html" title="Traffic Rush">
-           <div class="game-item">
-            <div class="list-game">
-            <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/35.webp"/></div>
-            </div>
-             </div>
-              </a>
-             </div>
-
-             <div class="col-lg-2 col-md-4 col-6 grid-3">
-              <a href="./game/game36.html" title="Traffic Rush">
-             <div class="game-item">
-              <div class="list-game">
-              <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/36.webp"/></div>
-              </div>
-               </div>
-                </a>
-               </div>
-               <div class="col-lg-2 col-md-4 col-6 grid-3">
-                <a href="./game/game40.html" title="Traffic Rush">
-               <div class="game-item">
-                <div class="list-game">
-                <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/40.webp"/></div>
                 </div>
-                 </div>
-                  </a>
-                 </div> 
 
-                 <div class="col-lg-2 col-md-4 col-6 grid-3">
-                  <a href="./game/game41.html" title="Traffic Rush">
-                 <div class="game-item">
-                  <div class="list-game">
-                  <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/41.webp"/></div>
-                  </div>
-                   </div>
-                    </a>
-                   </div> 
-
-                   <div class="col-lg-2 col-md-4 col-6 grid-3">
-                    <a href="./game/game42.html" title="Traffic Rush">
-                   <div class="game-item">
-                    <div class="list-game">
-                    <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/42.webp"/></div>
-                    </div>
-                     </div>
-                      </a>
-                     </div> 
-
-                     <div class="col-lg-2 col-md-4 col-6 grid-3">
-                      <a href="./game/game43.html" title="Traffic Rush">
-                     <div class="game-item">
-                      <div class="list-game">
-                      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/43.webp"/></div>
-                      </div>
-                       </div>
-                        </a>
-                       </div> 
-
-                       <div class="col-lg-2 col-md-4 col-6 grid-3">
-                        <a href="./game/game44.html" title="Traffic Rush">
-                       <div class="game-item">
-                        <div class="list-game">
-                        <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/44.webp"/></div>
+                <!-- Chat Section -->
+                <div class="section">
+                    <div class="section-title">Chat</div>
+                    <div class="chat-box">
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="chat-message">Game started!</div>
                         </div>
-                         </div>
-                          </a>
-                         </div> 
+                        <div class="chat-input-group">
+                            <input type="text" class="chat-input" id="chatInput" placeholder="Say something...">
+                            <button class="chat-send" onclick="sendChat()">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                         <div class="col-lg-2 col-md-4 col-6 grid-3">
-                          <a href="./game/game45.html" title="Traffic Rush">
-                         <div class="game-item">
-                          <div class="list-game">
-                          <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/45.webp"/></div>
-                          </div>
-                           </div>
-                            </a>
-                           </div> 
+    <script>
+        // Game State
+        let currentUser = null;
+        let gameActive = false;
 
-                           <div class="col-lg-2 col-md-4 col-6 grid-3">
-                            <a href="./game/game46.html" title="Traffic Rush">
-                           <div class="game-item">
-                            <div class="list-game">
-                            <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/46.webp"/></div>
-                            </div>
-                             </div>
-                              </a>
-                             </div> 
+        // Toggle between login and register forms
+        function toggleAuthForm() {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const toggleText = document.getElementById('toggleText');
 
+            if (loginForm.style.display === 'block') {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                toggleText.innerHTML = 'Already have an account? <a onclick="toggleAuthForm()">Sign In</a>';
+            } else {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+                toggleText.innerHTML = "Don't have an account? <a onclick=\"toggleAuthForm()\">Sign Up</a>";
+            }
+        }
 
+        // Handle login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-                             <div class="col-lg-2 col-md-4 col-6 grid-3">
-                              <a href="./game/game47.html" title="Traffic Rush">
-                             <div class="game-item">
-                              <div class="list-game">
-                              <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/47.webp"/></div>
-                              </div>
-                               </div>
-                                </a>
-                               </div> 
+            // Basic validation (in production, this would be sent to a server)
+            if (username && password) {
+                loginUser(username);
+            } else {
+                showError('Please fill in all fields');
+            }
+        });
 
+        // Handle registration
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
 
+            if (password !== confirmPassword) {
+                showError('Passwords do not match');
+                return;
+            }
 
-                               <div class="col-lg-2 col-md-4 col-6 grid-3">
-                                <a href="./game/game48.html" title="Traffic Rush">
-                               <div class="game-item">
-                                <div class="list-game">
-                                <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/48.webp"/></div>
-                                </div>
-                                 </div>
-                                  </a>
-                                 </div> 
+            if (username && email && password) {
+                loginUser(username);
+            } else {
+                showError('Please fill in all fields');
+            }
+        });
 
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+            setTimeout(() => {
+                errorDiv.classList.remove('show');
+            }, 3000);
+        }
 
-                                 <div class="col-lg-2 col-md-4 col-6 grid-3">
-                                  <a href="./game/game49.html" title="Traffic Rush">
-                                 <div class="game-item">
-                                  <div class="list-game">
-                                  <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/49.webp"/></div>
-                                  </div>
-                                   </div>
-                                    </a>
-                                   </div> 
+        function loginUser(username) {
+            currentUser = {
+                username: username,
+                points: 0,
+                team: 'Team A'
+            };
 
-                                   <div class="col-lg-2 col-md-4 col-6 grid-3">
-                                    <a href="./game/game50.html" title="Traffic Rush">
-                                   <div class="game-item">
-                                    <div class="list-game">
-                                    <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/50.webp"/></div>
-                                    </div>
-                                     </div>
-                                      </a>
-                                     </div> 
+            // Switch to game view
+            document.getElementById('loginContainer').classList.remove('active');
+            document.getElementById('gameContainer').classList.add('active');
+            document.getElementById('currentPlayerName').textContent = username;
+            gameActive = true;
 
-                                     <div class="col-lg-2 col-md-4 col-6 grid-3">
-                                      <a href="./game/game51.html" title="Traffic Rush">
-                                     <div class="game-item">
-                                      <div class="list-game">
-                                      <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/51.webp"/></div>
-                                      </div>
-                                       </div>
-                                        </a>
-                                       </div> 
+            // Initialize game
+            initializeGame();
+        }
 
-                                       <div class="col-lg-2 col-md-4 col-6 grid-3">
-                                        <a href="./game/game52.html" title="Traffic Rush">
-                                       <div class="game-item">
-                                        <div class="list-game">
-                                        <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/52.webp"/></div>
-                                        </div>
-                                         </div>
-                                          </a>
-                                         </div> 
+        function logout() {
+            if (confirm('Are you sure you want to leave the game?')) {
+                currentUser = null;
+                gameActive = false;
+                document.getElementById('gameContainer').classList.remove('active');
+                document.getElementById('loginContainer').classList.add('active');
+                
+                // Reset forms
+                document.getElementById('loginForm').reset();
+                document.getElementById('registerForm').reset();
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('registerForm').style.display = 'none';
+                document.getElementById('toggleText').innerHTML = "Don't have an account? <a onclick=\"toggleAuthForm()\">Sign Up</a>";
+            }
+        }
 
-                                         <div class="col-lg-2 col-md-4 col-6 grid-3">
-                                          <a href="./game/game53.html" title="Traffic Rush">
-                                         <div class="game-item">
-                                          <div class="list-game">
-                                          <div class="list-thumbnail"><img alt="Traffic Rush" class="lazyload" src="img/53.webp"/></div>
-                                          </div>
-                                           </div>
-                                            </a>
-                                           </div> 
-                                           
-                                                            
+        function initializeGame() {
+            // Game initialization logic
+            console.log('Game initialized for player:', currentUser.username);
+        }
 
-</div>
-<!-- end Poplular -->
-</div> <!-- end container -->
-<div class="footer-copyright py-4">
-<div class="container">
-      randombasketballonline.github.io      <span class="dsb-panel">
-        Random Basket Ball Online - <a href="/dmca.html">DMCA</a> </span>
-</div>
-</div>
-<script src="js/jquery-3.6.2.min.js" type="text/javascript"></script>
-<script src="js/lazysizes.min.js" type="text/javascript"></script>
-<script src="js/popper.min.js" type="text/javascript"></script>
-<script src="js/bootstrap.min.js" type="text/javascript"></script>
-<script src="js/script.js" type="text/javascript"></script>
-<script src="js/custom.js" type="text/javascript"></script>
+        function shoot() {
+            if (!gameActive) return;
+            console.log('Player shot!');
+            addChatMessage('You shot the ball!');
+            // Add game logic here
+        }
+
+        function pass() {
+            if (!gameActive) return;
+            console.log('Player passed!');
+            addChatMessage('You passed the ball!');
+            // Add game logic here
+        }
+
+        function defend() {
+            if (!gameActive) return;
+            console.log('Player defending!');
+            addChatMessage('You are defending!');
+            // Add game logic here
+        }
+
+        function sendChat() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+
+            if (message) {
+                addChatMessage(message, currentUser.username);
+                chatInput.value = '';
+            }
+        }
+
+        function addChatMessage(message, sender = 'System') {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message';
+            messageDiv.textContent = `${sender}: ${message}`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Ball dragging functionality
+        const ball = document.getElementById('ball');
+        const court = document.getElementById('courtArea');
+        let isDragging = false;
+
+        ball.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            ball.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging || !gameActive) return;
+
+            const rect = court.getBoundingClientRect();
+            let x = e.clientX - rect.left - 12.5;
+            let y = e.clientY - rect.top - 12.5;
+
+            // Keep ball within court
+            x = Math.max(0, Math.min(x, rect.width - 25));
+            y = Math.max(0, Math.min(y, rect.height - 25));
+
+            ball.style.left = x + 'px';
+            ball.style.top = y + 'px';
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            ball.style.cursor = 'grab';
+        });
+
+        // Allow Enter key to send chat
+        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendChat();
+            }
+        });
+
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            console.log('Random Basket game interface loaded');
+        });
+    </script>
 </body>
 </html>
